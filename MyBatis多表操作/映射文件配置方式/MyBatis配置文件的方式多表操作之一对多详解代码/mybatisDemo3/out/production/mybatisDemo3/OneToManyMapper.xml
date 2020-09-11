@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.cdw.demo.mapper.OneToManyMapper">
+    <resultMap id="OneToMany" type="classes">
+        <id column="c_id" property="id"/>
+        <result column="c_name" property="name"/>
+
+        <collection property="studentList" ofType="student">
+            <id column="s_id" property="id"/>
+            <result column="s_name" property="name"/>
+            <result column="s_age" property="age"/>
+        </collection>
+    </resultMap>
+    
+    <select id="findAll" resultMap="OneToMany">
+        SELECT s.id s_id,s.name s_name,s.age s_age,c.id c_id,c.name c_name FROM student s,classes c WHERE s.c_id = c.id
+    </select>
+</mapper>
